@@ -1,0 +1,24 @@
+{
+  "name": "itunes-search-proxy",
+  "type": "module",
+  "devDependencies": {
+    "@types/cors": "^2.8.19",
+    "@types/express": "^5.0.6",
+    "@types/morgan": "^1.9.10",
+    "@types/node": "^25.0.2",
+    "tsx": "^4.21.0"
+  },
+  "dependencies": {
+    "axios": "^1.13.2",
+    "cors": "^2.8.5",
+    "express": "^5.2.1",
+    "helmet": "^8.1.0",
+    "morgan": "^1.10.1",
+    "typescript": "^5.9.3",
+    "zod": "^4.2.1"
+  },
+  "scripts": {
+    "start": "tsx index.ts",
+    "dev": "tsx watch --ignore 'node_modules' --ignore 'dist' index.ts"
+  }
+}
