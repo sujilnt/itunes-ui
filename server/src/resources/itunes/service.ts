@@ -44,7 +44,7 @@ export type ItunesServiceResult = ItunesResponse;
 
 class ItunesService {
   
-    private readonly ITUNES_API_URL = "https://itunes.apple.com/searcch";
+    private readonly ITUNES_API_URL = "https://itunes.apple.com/search";
 
     async getItunes(searchParams: SearchParams): Promise<ItunesServiceResult> {
        const { term, limit, offset } = searchParams;

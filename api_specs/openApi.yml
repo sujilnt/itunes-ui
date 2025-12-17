@@ -1,0 +1,149 @@
+openapi: 3.0.3
+info:
+  title: iTunes Search API
+  description: API for searching iTunes content
+  version: 1.0.0
+
+servers:
+  - url: http://localhost:3000
+    description: Local development server
+
+paths:
+  /itunes:
+    get:
+      summary: Get and Search iTunes content
+      description: Get and Search for movies, music, and other content in the iTunes store
+      operationId: getItunes
+      tags:
+        - Itunes
+      parameters:
+        - name: term
+          in: query
+          description: Search term
+          required: false
+          schema:
+            type: string
+        - name : limit
+          in: query
+          description: limit
+          required: false
+          schema:
+            type: number
+        - name: offset
+          in: query
+          description: offset
+          required: false
+          schema:
+           type: number     
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Itunes'
+
+components:
+  schemas:
+    Itunes:
+      type: object
+      properties:
+        resultCount:
+          type: integer
+          example: 1
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Track'
+
+    Track:
+      type: object
+      properties:
+        wrapperType:
+          type: string
+          example: track
+        kind:
+          type: string
+          example: feature-movie
+        trackId:
+          type: integer
+          example: 1856104865
+        artistName:
+          type: string
+          example: Tatsuya Yoshihara
+        trackName:
+          type: string
+          example: "Chainsaw Man - The Movie: Reze Arc"
+        trackCensoredName:
+          type: string
+          example: "Chainsaw Man - The Movie: Reze Arc"
+        trackViewUrl:
+          type: string
+          format: uri
+          example: "https://itunes.apple.com/us/movie/chainsaw-man-the-movie-reze-arc/id1856104865?uo=4"
+        previewUrl:
+          type: string
+          format: uri
+          example: "https://video-ssl.itunes.apple.com/itunes-assets/Video221/v4/b4/aa/4b/b4aa4b31-feb2-0d22-2898-7f8b7e7d1487/mzvf_1582061625990988600.640x354.h264lc.U.p.m4v"
+        artworkUrl30:
+          type: string
+          format: uri
+        artworkUrl60:
+          type: string
+          format: uri
+        artworkUrl100:
+          type: string
+          format: uri
+        collectionPrice:
+          type: number
+          format: float
+          example: 24.99
+        trackPrice:
+          type: number
+          format: float
+          example: 24.99
+        trackRentalPrice:
+          type: number
+          format: float
+          example: 19.99
+        collectionHdPrice:
+          type: number
+          format: float
+          example: 24.99
+        trackHdPrice:
+          type: number
+          format: float
+          example: 24.99
+        trackHdRentalPrice:
+          type: number
+          format: float
+          example: 19.99
+        releaseDate:
+          type: string
+          format: date-time
+          example: "2025-10-24T07:00:00Z"
+        collectionExplicitness:
+          type: string
+          example: notExplicit
+        trackExplicitness:
+          type: string
+          example: notExplicit
+        trackTimeMillis:
+          type: integer
+          example: 6005500
+        country:
+          type: string
+          example: USA
+        currency:
+          type: string
+          example: USD
+        primaryGenreName:
+          type: string
+          example: "Action & Adventure"
+        contentAdvisoryRating:
+          type: string
+          example: R
+        shortDescription:
+          type: string
+        longDescription:
+          type: string

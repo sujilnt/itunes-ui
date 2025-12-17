@@ -1,0 +1,10 @@
+apis/ItunesApi.ts
+apis/index.ts
+docs/Itunes.md
+docs/ItunesApi.md
+docs/Track.md
+index.ts
+models/Itunes.ts
+models/Track.ts
+models/index.ts
+runtime.ts
