@@ -47,7 +47,7 @@ export function HomePage() {
               <Search
               value={filters.term}
               onSearch={ (term: string) => {
-               dispatch(setFilters({ term, offset: 0 }));
+               dispatch(setFilters({ term }));
                }}
             />  
             </div>

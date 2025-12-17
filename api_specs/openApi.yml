@@ -28,13 +28,7 @@ paths:
           description: limit
           required: false
           schema:
-            type: number
-        - name: offset
-          in: query
-          description: offset
-          required: false
-          schema:
-           type: number     
+            type: number  
       responses:
         '200':
           description: Successful response

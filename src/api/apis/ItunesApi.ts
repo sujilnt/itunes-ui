@@ -25,7 +25,6 @@ import {
 export interface GetItunesRequest {
     term?: string;
     limit?: number;
-    offset?: number;
 }
 
 /**
@@ -46,10 +45,6 @@ export class ItunesApi extends runtime.BaseAPI {
 
         if (requestParameters['limit'] != null) {
             queryParameters['limit'] = requestParameters['limit'];
-        }
-
-        if (requestParameters['offset'] != null) {
-            queryParameters['offset'] = requestParameters['offset'];
         }
 
         const headerParameters: runtime.HTTPHeaders = {};

@@ -22,7 +22,6 @@ const initialState: ItunesState = {
   error: null,
   filters: {
     limit: 10,
-    offset: 0,
     term: ""
   }
 }
@@ -48,9 +47,6 @@ const itunesSlice = createSlice({
             ...state.filters,
             ...action.payload,
            };
-        },
-        loadMore(state) {
-          state.filters.offset = (state.filters.offset ?? 0) + (state.filters.limit ?? 10);
         },
         reset(){
           return initialState;
@@ -93,6 +89,6 @@ const itunesSlice = createSlice({
 
 
 export const itunesReducer = itunesSlice.reducer;
-export const { setFilters, setItunes, loadMore,reset } = itunesSlice.actions;
+export const { setFilters, setItunes,reset } = itunesSlice.actions;
 
 
