@@ -1,6 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import { css } from "@emotion/react";
-import { type ReactNode } from "react";
+import type { ReactNode } from "react";
 
 interface PageProps {
 	children: ReactNode;

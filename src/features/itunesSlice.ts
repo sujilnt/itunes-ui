@@ -51,7 +51,7 @@ const itunesSlice = createSlice({
 		},
 	},
 	extraReducers: (builder) => {
-		builder.addCase(fetchItunes.pending, (state, action) => {
+		builder.addCase(fetchItunes.pending, (state) => {
 			state.isLoading = true;
 			state.error = null;
 		});

@@ -18,7 +18,7 @@ export const useIntersectionObserver = (props: IntersectionObserverProps) => {
 
 	const memoizedOptions = useMemo(
 		() => options,
-		[options?.root, options?.rootMargin, options?.threshold],
+		[],
 	);
 
 	useEffect(() => {
