@@ -1,75 +1,67 @@
-# React + TypeScript + Vite
+# Itunes UI
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+React + TypeScript + Vite front-end for browsing iTunes search results. Uses Material UI for layout/components and Redux Toolkit for state.
 
-Currently, two official plugins are available:
+## Tech Stack
+- React 19 + TypeScript
+- Vite
+- Material UI
+- Redux Toolkit + React Redux
+- OpenAPI-generated API client (typescript-fetch)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Prerequisites
+- Node.js ≥ 18 (LTS recommended)
+- npm
 
-## React Compiler
-
-The React Compiler is enabled on this template. See [this documentation](https://react.dev/learn/react-compiler) for more information.
-
-Note: This will impact Vite dev & build performances.
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+## Project Setup
+1) Install dependencies  
+```bash
+npm install
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+2) Run the app in dev mode (with HMR)  
+```bash
+npm run dev
 ```
+App starts at the URL printed by Vite (typically http://localhost:5173).
+
+3) Lint the code  
+```bash
+npm run lint
+```
+
+4) Build for production  
+```bash
+npm run build
+```
+
+5) Preview the production build locally  
+```bash
+npm run preview
+```
+
+## Optional: API generation
+The OpenAPI client can be regenerated from `api_specs/openApi.yml`:
+```bash
+npm run openapi
+```
+This will overwrite the generated client in `src/api`.
+
+## Optional: Server commands
+If you use the bundled server (inside `/server`):
+```bash
+npm run server:dev      # start server in dev mode
+npm run server:build    # build server
+npm run server:preview  # preview built server
+```
+
+## Project Structure (high level)
+- `src/pages/Home` — Itunes gallery page
+- `src/features` — Redux slices/tests
+- `src/hooks` — Custom hooks (e.g., intersection observer)
+- `src/api` — Generated API client
+- `src/components` — Reusable UI pieces
+
+## Notes
+- The React Compiler is enabled (via `babel-plugin-react-compiler`).
+- Material UI uses the bundled Roboto font (@fontsource/roboto).***
