@@ -1,12 +1,12 @@
 import { type RefObject, useEffect, useState, useCallback, useMemo } from "react";
 
-export interface InfiniteScrollProps {
+export interface IntersectionObserverProps {
     elementRef: RefObject<HTMLDivElement | null>;
     activateObserver?: boolean;
     options?: IntersectionObserverInit;
 }
 
-export const useInfiniteScroll = (props: InfiniteScrollProps) => {
+export const useIntersectionObserver = (props: IntersectionObserverProps) => {
     const { elementRef, activateObserver = true, options } = props;
     const [isInView, setIsInView] = useState(false);
 
@@ -17,7 +17,7 @@ export const useInfiniteScroll = (props: InfiniteScrollProps) => {
     ]);
 
     useEffect(() => {
-        const element = elementRef.current;
+        const element = elementRef?.current;
         if (!element || !activateObserver) {
             return;
         }
@@ -32,7 +32,7 @@ export const useInfiniteScroll = (props: InfiniteScrollProps) => {
         return () => {
             observer.disconnect();
         };
-    }, [activateObserver, memoizedOptions, elementRef.current]);
+    }, [activateObserver, memoizedOptions, elementRef]);
 
     const resetInView = useCallback(() => {
         setIsInView(false);

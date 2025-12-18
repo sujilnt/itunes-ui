@@ -11,7 +11,7 @@ import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 import { useAppSelector } from '@store';
 import { useEffect, useRef, type Dispatch } from 'react';
-import { useInfiniteScroll } from '@hooks/useInfiniteScroll';
+import { useIntersectionObserver  } from '@hooks/useIntersectionObserver';
 
 export interface ItuneGalleryProps {
   items: Track[];
@@ -27,12 +27,13 @@ export function ItuneGallery(props: ItuneGalleryProps) {
 
   const displayItems = items.slice(0, displayCount);
   const hasMoreToDisplay = displayCount < items.length;
+  const noItems = displayItems?.length==0;
   
-  const { isInView,resetInView }= useInfiniteScroll({
+  const { isInView,resetInView }= useIntersectionObserver({
     elementRef,
     activateObserver: !!itunes?.results?.length,
     options: {
-      rootMargin: '20px',
+      rootMargin: '50px',
       threshold: 0,
     }
   });
@@ -44,12 +45,10 @@ export function ItuneGallery(props: ItuneGalleryProps) {
     }
   },[isInView, hasMoreToDisplay, items.length, resetInView, setDisplayCount])
 
-  //console.log("isInVIew", isInView, !!itunes?.results?.length,elementRef);
-
   return (
     <>
     <Stack spacing={2}>
-      <ShowOrHide when={!items.length}>
+      <ShowOrHide when={noItems}>
       <Alert severity="info">{emptyMessage}</Alert>
     </ShowOrHide>
     <ShowOrHide when={isLoading}>
@@ -86,7 +85,7 @@ export function ItuneGallery(props: ItuneGalleryProps) {
       </Grid>
       </ShowOrHide>
      <div ref={elementRef} style={{ height: 1 }} />
-      <ShowOrHide when={!hasMoreToDisplay && items.length > 0}>
+      <ShowOrHide when={(displayItems?.length === items?.length) && !noItems}>
         <Alert severity="success" sx={{ textAlign: 'center' }}>
           All results loaded
         </Alert>
