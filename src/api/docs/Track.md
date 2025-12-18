@@ -8,6 +8,7 @@ Name | Type
 ------------ | -------------
 `wrapperType` | string
 `kind` | string
+`artistId` | number
 `trackId` | number
 `artistName` | string
 `trackName` | string
@@ -44,6 +45,7 @@ import type { Track } from ''
 const example = {
   "wrapperType": track,
   "kind": feature-movie,
+  "artistId": 16696215,
   "trackId": 1856104865,
   "artistName": Tatsuya Yoshihara,
   "trackName": Chainsaw Man - The Movie: Reze Arc,

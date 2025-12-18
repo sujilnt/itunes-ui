@@ -36,6 +36,12 @@ export interface Track {
      * @type {number}
      * @memberof Track
      */
+    artistId?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof Track
+     */
     trackId?: number;
     /**
      * 
@@ -208,6 +214,7 @@ export function TrackFromJSONTyped(json: any, ignoreDiscriminator: boolean): Tra
         
         'wrapperType': json['wrapperType'] == null ? undefined : json['wrapperType'],
         'kind': json['kind'] == null ? undefined : json['kind'],
+        'artistId': json['artistId'] == null ? undefined : json['artistId'],
         'trackId': json['trackId'] == null ? undefined : json['trackId'],
         'artistName': json['artistName'] == null ? undefined : json['artistName'],
         'trackName': json['trackName'] == null ? undefined : json['trackName'],
@@ -250,6 +257,7 @@ export function TrackToJSONTyped(value?: Track | null, ignoreDiscriminator: bool
         
         'wrapperType': value['wrapperType'],
         'kind': value['kind'],
+        'artistId': value['artistId'],
         'trackId': value['trackId'],
         'artistName': value['artistName'],
         'trackName': value['trackName'],
