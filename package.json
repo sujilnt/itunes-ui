@@ -12,7 +12,10 @@
 		"server:build": "cd server && npm run build",
 		"test": "vitest",
 		"server:preview": "cd server && npm run preview",
-		"openapi": "npx @openapitools/openapi-generator-cli generate -i api_specs/openApi.yml -g typescript-fetch -o src/api --additional-properties=dateTimeType=string --type-mappings=DateTime=string --type-mappings=Date=string"
+		"openapi": "npx @openapitools/openapi-generator-cli generate -i api_specs/openApi.yml -g typescript-fetch -o src/api --additional-properties=dateTimeType=string --type-mappings=DateTime=string --type-mappings=Date=string",
+		"format": "npx @biomejs/biome format --write",
+		"biome:lint": "npx @biomejs/biome lint --write",
+		"biome:check": "npx @biomejs/biome check --write"
 	},
 	"dependencies": {
 		"@emotion/react": "^11.14.0",
