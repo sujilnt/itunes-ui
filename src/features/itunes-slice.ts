@@ -1,12 +1,10 @@
 import { createAsyncThunk, createSlice, type PayloadAction, type SerializedError } from "@reduxjs/toolkit";
 import type { GetItunesRequest, Itunes } from "@api";
 import api from "@services/api";
-
+export const MAX_LIMIT = 200;
 export interface ItunesState {
   itunes: Itunes;
   isLoading: boolean;
-  isLoadingMore: boolean;
-  hasMore: boolean;
   error: SerializedError | null;
   filters: GetItunesRequest
 }
@@ -17,11 +15,10 @@ const initialState: ItunesState = {
     results: [],
   },
   isLoading: false,
-  isLoadingMore: false,
-  hasMore: true,
   error: null,
   filters: {
-    limit: 10,
+    // Note itunes api dont support offset or pagination
+    limit: MAX_LIMIT,
     term: ""
   }
 }
@@ -31,8 +28,6 @@ export const fetchItunes = createAsyncThunk<Itunes, GetItunesRequest>(
   "itunes/fetchItunes",
   async (params) => api.itunes.getItunes(params)
 )
-
-
 
 
 const itunesSlice = createSlice({
@@ -55,33 +50,18 @@ const itunesSlice = createSlice({
     },
     extraReducers: (builder) => {
         builder.addCase(fetchItunes.pending, (state, action) => {
-            const isLoadingMore = (action.meta.arg.offset ?? 0) > 0;
-            if (isLoadingMore) {
-              state.isLoadingMore = true;
-            } else {
-              state.isLoading = true;
-            }
+            state.isLoading = true;
             state.error = null;
         });
 
         builder.addCase(fetchItunes.fulfilled, (state, action) => {
-            const isAppend = (action.meta.arg.offset ?? 0) > 0;
-            const newResults = action.payload.results ?? [];
-            
-            if (isAppend) {
-              state.itunes.results = [...(state.itunes.results ?? []), ...newResults];
-            } else {
-              state.itunes.results = newResults;
-            }
+            state.itunes.results = action.payload.results;
             state.itunes.resultCount = action.payload.resultCount;
             state.isLoading = false;
-            state.isLoadingMore = false;
-            state.hasMore = newResults.length >= (state.filters.limit ?? 10);
         });
 
         builder.addCase(fetchItunes.rejected, (state, action) => {
             state.isLoading = false;
-            state.isLoadingMore = false;
             state.error = action.error;
         });
     }

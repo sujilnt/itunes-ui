@@ -10,12 +10,13 @@ import {
 import Search from '../../components/Search';
 import { fetchItunes, setFilters, reset } from '@features/itunes-slice';
 import { useAppDispatch, useAppSelector } from '@store';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { ItuneGallery } from './ItuneGallery';
 
 export function HomePage() {
   const dispatch = useAppDispatch();
   const { filters, itunes } = useAppSelector((state) => state.itunes);
+  const [displayCount, setDisplayCount] = useState(10);
   const emptyMessage = filters.term ? `No results found for "${filters.term}"` : 'Search for artists, albums, or songs';
 
   useEffect(()=>{
@@ -48,12 +49,15 @@ export function HomePage() {
               value={filters.term}
               onSearch={ (term: string) => {
                dispatch(setFilters({ term }));
+               setDisplayCount(10);
                }}
             />  
             </div>
             <ItuneGallery
               items={itunes.results ?? []}
               emptyMessage={emptyMessage}
+              displayCount={displayCount}
+              setDisplayCount={setDisplayCount}
             />
           </PageSection>
         </Stack>

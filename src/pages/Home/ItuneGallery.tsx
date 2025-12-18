@@ -9,59 +9,56 @@ import { ShowOrHide } from '../../components/ShowOrHide';
 import Grid from '@mui/material/Grid';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
-import { useAppDispatch, useAppSelector } from '@store';
-import { loadMore } from '@features/itunes-slice';
-import { useCallback, useEffect, useRef } from 'react';
-
-
+import { useAppSelector } from '@store';
+import { useEffect, useRef, type Dispatch } from 'react';
+import { useInfiniteScroll } from '@hooks/useInfiniteScroll';
 
 export interface ItuneGalleryProps {
   items: Track[];
   emptyMessage?: string;
+  displayCount: number;
+  setDisplayCount: Dispatch<React.SetStateAction<number>>;
 }
 
 export function ItuneGallery(props: ItuneGalleryProps) {
-  const { items, emptyMessage = 'No results found' } = props;
-  const dispatch = useAppDispatch();
-  const { isLoading, isLoadingMore, hasMore } = useAppSelector((state) => state.itunes);
-  const sentinelRef = useRef<HTMLDivElement>(null);
+  const { items, emptyMessage = 'No results found', displayCount, setDisplayCount } = props;
+  const { isLoading, itunes } = useAppSelector((state) => state.itunes);
+  const elementRef = useRef<HTMLDivElement>(null);
 
-  const handleLoadMore = useCallback(() => {
-    dispatch(loadMore());
-  }, [dispatch]);
+  const displayItems = items.slice(0, displayCount);
+  const hasMoreToDisplay = displayCount < items.length;
+  
+  const { isInView,resetInView }= useInfiniteScroll({
+    elementRef,
+    activateObserver: !!itunes?.results?.length,
+    options: {
+      rootMargin: '20px',
+      threshold: 0,
+    }
+  });
 
-  const loadMoreRef = useRef(handleLoadMore);
-  loadMoreRef.current = handleLoadMore;
+  useEffect(()=>{
+    if(hasMoreToDisplay && isInView){
+      setDisplayCount((prev) => Math.min(prev + 10, items.length));
+      resetInView();
+    }
+  },[isInView, hasMoreToDisplay, items.length, resetInView, setDisplayCount])
 
-  const hasItems = items.length > 0;
-
-  useEffect(() => {
-    const el = sentinelRef.current;
-    if (!el || !hasMore || isLoadingMore || !hasItems) return;
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        if (entries[0]?.isIntersecting) loadMoreRef.current?.();
-      },
-      { rootMargin: '200px' }
-    );
-    observer.observe(el);
-    return () => observer.disconnect();
-  }, [hasMore, isLoadingMore, hasItems]);
-
-  if (isLoading) {
-    return <Loading />;
-  }
-
-  if (!items.length) {
-    return <Alert severity="info">{emptyMessage}</Alert>;
-  }
+  //console.log("isInVIew", isInView, !!itunes?.results?.length,elementRef);
 
   return (
+    <>
     <Stack spacing={2}>
+      <ShowOrHide when={!items.length}>
+      <Alert severity="info">{emptyMessage}</Alert>
+    </ShowOrHide>
+    <ShowOrHide when={isLoading}>
+      <Loading size={40} />
+    </ShowOrHide>
+    <ShowOrHide when={!isLoading}>
       <Grid container spacing={2}>
-        {items.map((item) => (
-          <Grid key={item.trackId} size={{ xs: 12, sm: 6, md: 4, lg: 3 }}>
+        {displayItems.map((item) => (
+          <Grid key={item.trackId ?? item.collectionId} size={{ xs: 12, sm: 6, md: 4, lg: 4 }}>
             <Card>
               <CardActionArea
                 component={item.trackViewUrl ? 'a' : 'div'}
@@ -86,11 +83,15 @@ export function ItuneGallery(props: ItuneGalleryProps) {
             </Card>
           </Grid>
         ))}
-        <div ref={sentinelRef} />
       </Grid>
-      <ShowOrHide when={isLoadingMore}>
-        <Loading size={24} py={1} />
+      </ShowOrHide>
+     <div ref={elementRef} style={{ height: 1 }} />
+      <ShowOrHide when={!hasMoreToDisplay && items.length > 0}>
+        <Alert severity="success" sx={{ textAlign: 'center' }}>
+          All results loaded
+        </Alert>
       </ShowOrHide>
     </Stack>
+    </>
   );
 }

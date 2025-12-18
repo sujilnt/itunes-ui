@@ -181,6 +181,12 @@ export interface Track {
      * @memberof Track
      */
     longDescription?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof Track
+     */
+    collectionId?: number;
 }
 
 /**
@@ -227,6 +233,7 @@ export function TrackFromJSONTyped(json: any, ignoreDiscriminator: boolean): Tra
         'contentAdvisoryRating': json['contentAdvisoryRating'] == null ? undefined : json['contentAdvisoryRating'],
         'shortDescription': json['shortDescription'] == null ? undefined : json['shortDescription'],
         'longDescription': json['longDescription'] == null ? undefined : json['longDescription'],
+        'collectionId': json['collectionId'] == null ? undefined : json['collectionId'],
     };
 }
 
@@ -268,6 +275,7 @@ export function TrackToJSONTyped(value?: Track | null, ignoreDiscriminator: bool
         'contentAdvisoryRating': value['contentAdvisoryRating'],
         'shortDescription': value['shortDescription'],
         'longDescription': value['longDescription'],
+        'collectionId': value['collectionId'],
     };
 }
 
