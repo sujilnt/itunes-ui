@@ -1,10 +1,10 @@
-import type { ReactNode } from 'react';
+import type { ReactNode } from "react";
 
 interface ShowOrHideProps {
-  when: boolean;
-  children: ReactNode;
+	when: boolean;
+	children: ReactNode;
 }
 
 export function ShowOrHide({ when, children }: ShowOrHideProps) {
-  return when ? <>{children}</> : null;
+	return when ? <>{children}</> : null;
 }

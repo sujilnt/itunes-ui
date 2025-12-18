@@ -1,8 +1,8 @@
-import express from 'express';
+import express from "express";
 import cors from "cors";
 import helmet from "helmet";
 import morgan from "morgan";
-import itunesRoute from '@/resources/itunes/route';
+import itunesRoute from "@/resources/itunes/route";
 
 const app = express();
 const port = 3001;
@@ -12,13 +12,10 @@ app.use(helmet());
 app.use(express.json());
 app.use(cors());
 app.use(morgan("dev"));
-app.use("/api/itunes", itunesRoute)
-
+app.use("/api/itunes", itunesRoute);
 
 app.listen(port, () => {
-  console.log(`iTunes server running:
+	console.log(`iTunes server running:
   - http://localhost:${port}
-  - http://127.0.0.1:${port}`)
+  - http://127.0.0.1:${port}`);
 });
-
-

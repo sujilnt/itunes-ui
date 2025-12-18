@@ -8,6 +8,7 @@ React + TypeScript + Vite front-end for browsing iTunes search results. Uses Mat
 - Material UI
 - Redux Toolkit + React Redux
 - OpenAPI-generated API client (typescript-fetch)
+- Vitest + React Testing Library
 
 ## Prerequisites
 - Node.js ≥ 18 (LTS recommended)
@@ -30,12 +31,17 @@ App starts at the URL printed by Vite (typically http://localhost:5173).
 npm run lint
 ```
 
-4) Build for production  
+4) Run tests  
+```bash
+npm run test
+```
+
+5) Build for production  
 ```bash
 npm run build
 ```
 
-5) Preview the production build locally  
+6) Preview the production build locally  
 ```bash
 npm run preview
 ```
