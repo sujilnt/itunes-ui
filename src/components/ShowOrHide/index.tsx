@@ -6,5 +6,5 @@ interface ShowOrHideProps {
 }
 
 export function ShowOrHide({ when, children }: ShowOrHideProps) {
-	return when ? <>{children}</> : null;
+	return when ? children : null;
 }

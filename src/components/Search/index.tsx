@@ -1,4 +1,4 @@
-import React, { memo, useEffect, useMemo } from "react";
+import { memo, useEffect, useMemo } from "react";
 import IconButton from "@mui/material/IconButton";
 import InputAdornment from "@mui/material/InputAdornment";
 import TextField from "@mui/material/TextField";
@@ -10,7 +10,7 @@ interface SearchProps {
 	value?: string;
 }
 
-const Search: React.FC<SearchProps> = memo(({ onSearch, value }) => {
+const Search = memo(function Search({ onSearch, value }: SearchProps) {
 	const onDebouncedSearch = useMemo(() => debounce(onSearch, 300), [onSearch]);
 
 	useEffect(() => {
