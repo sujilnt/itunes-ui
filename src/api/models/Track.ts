@@ -45,6 +45,30 @@ export interface Track {
     trackId?: number;
     /**
      * 
+     * @type {number}
+     * @memberof Track
+     */
+    collectionId?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof Track
+     */
+    collectionName?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof Track
+     */
+    collectionCensoredName?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof Track
+     */
+    collectionViewUrl?: string;
+    /**
+     * 
      * @type {string}
      * @memberof Track
      */
