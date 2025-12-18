@@ -56,10 +56,11 @@ This will overwrite the generated client in `src/api`.
 ## Optional: Server commands
 If you use the bundled server (inside `/server`):
 ```bash
-npm run server:dev      # start server in dev mode
+npm run server:dev      # start server in dev mode (http://localhost:3001)
 npm run server:build    # build server
 npm run server:preview  # preview built server
 ```
+The server runs on port **3001** by default.
 
 ## Project Structure (high level)
 - `src/pages/Home` — Itunes gallery page
