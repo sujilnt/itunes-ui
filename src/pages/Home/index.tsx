@@ -8,7 +8,7 @@ import {
   PageFooter,
 } from '../../components/Page';
 import Search from '../../components/Search';
-import { fetchItunes, setFilters, reset } from '@features/itunes-slice';
+import { fetchItunes, setFilters, reset } from '@features/itunesSlice';
 import { useAppDispatch, useAppSelector } from '@store';
 import { useEffect, useState } from 'react';
 import { ItuneGallery } from './ItuneGallery';

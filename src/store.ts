@@ -1,5 +1,5 @@
 import { configureStore } from "@reduxjs/toolkit";  
-import { itunesReducer } from "./features/itunes-slice";
+import { itunesReducer } from "./features/itunesSlice";
 import {useSelector, type TypedUseSelectorHook, useDispatch} from "react-redux";
 
 

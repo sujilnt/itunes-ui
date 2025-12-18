@@ -141,3 +141,6 @@ components:
           type: string
         longDescription:
           type: string
+        collectionId:
+          type: integer
+          example: 1856104865

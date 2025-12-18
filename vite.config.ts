@@ -17,6 +17,7 @@ export default defineConfig({
       '@features': path.resolve(__dirname, 'src/features'),
       '@api': path.resolve(__dirname, 'src/api'),
       "@services": path.resolve(__dirname, 'src/services'),
+      "@hooks": path.resolve(__dirname, 'src/hooks'),
     },
   },
   define: {
