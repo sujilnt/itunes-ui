@@ -59,6 +59,9 @@ components:
         kind:
           type: string
           example: feature-movie
+        artistId:
+          type: integer
+          example: 16696215
         trackId:
           type: integer
           example: 1856104865

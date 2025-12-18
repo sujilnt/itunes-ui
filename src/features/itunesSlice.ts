@@ -9,7 +9,7 @@ export interface ItunesState {
   filters: GetItunesRequest
 }
 
-const initialState: ItunesState = {
+export const initialState: ItunesState = {
   itunes: {
     resultCount: 0,
     results: [],
