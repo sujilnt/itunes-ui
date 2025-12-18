@@ -60,7 +60,7 @@ npm run server:dev      # start server in dev mode (http://localhost:3001)
 npm run server:build    # build server
 npm run server:preview  # preview built server
 ```
-The server runs on port **3001** by default.
+The server runs on port **3001** by default. If you change the server port, update the proxy target in `vite.config.ts`.
 
 ## Project Structure (high level)
 - `src/pages/Home` — Itunes gallery page
